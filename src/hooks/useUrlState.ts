@@ -30,7 +30,8 @@ export const useUrlState = () => {
             decodedState.timelineData.entries = decodedState.timelineData.entries.map((entry: any) => ({
               ...entry,
               startDate: new Date(entry.startDate),
-              endDate: entry.endDate ? new Date(entry.endDate) : null
+              endDate: entry.endDate ? new Date(entry.endDate) : null,
+              labels: entry.labels || []
             }));
           }
           setState({ ...defaultState, ...decodedState });

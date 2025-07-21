@@ -134,7 +134,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({ entries, onEditEntry
                           top: `${row * 26 + 4}px`,
                           zIndex: 10 + row
                         }}
-                        title={`${entry.name}${entry.note ? ': ' + entry.note : ''}`}
+                        title={`${entry.name}${entry.labels && entry.labels.length > 0 ? ' [' + entry.labels.join(', ') + ']' : ''}${entry.note ? ': ' + entry.note : ''}`}
                         onClick={(e) => {
                           e.stopPropagation();
                           onEditEntry(entry);

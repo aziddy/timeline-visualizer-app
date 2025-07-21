@@ -5,6 +5,7 @@ export interface TimelineEntry {
   color: string;
   startDate: Date;
   endDate: Date | null; // null represents "present"
+  labels: string[];
 }
 
 export interface TimelineData {

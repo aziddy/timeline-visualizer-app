@@ -11,6 +11,7 @@ export const EntryForm: React.FC<EntryFormProps> = ({ entry, onSave, onCancel })
   const [name, setName] = useState(entry?.name || '');
   const [note, setNote] = useState(entry?.note || '');
   const [color, setColor] = useState(entry?.color || '#3B82F6');
+  const [labels, setLabels] = useState(entry?.labels?.join(', ') || '');
   const [startDate, setStartDate] = useState(
     entry?.startDate ? `${entry.startDate.getFullYear()}-${String(entry.startDate.getMonth() + 1).padStart(2, '0')}` : ''
   );
@@ -41,12 +42,17 @@ export const EntryForm: React.FC<EntryFormProps> = ({ entry, onSave, onCancel })
       return;
     }
 
+    const processedLabels = labels.trim() 
+      ? labels.split(',').map(label => label.trim()).filter(label => label)
+      : [];
+
     onSave({
       name: name.trim(),
       note: note.trim(),
       color,
       startDate: parsedStartDate,
-      endDate: parsedEndDate
+      endDate: parsedEndDate,
+      labels: processedLabels
     });
   };
 
@@ -82,6 +88,18 @@ export const EntryForm: React.FC<EntryFormProps> = ({ entry, onSave, onCancel })
               placeholder="Optional note"
               rows={3}
             />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="labels">Labels</label>
+            <input
+              type="text"
+              id="labels"
+              value={labels}
+              onChange={(e) => setLabels(e.target.value)}
+              placeholder="e.g. work, project, milestone (comma-separated)"
+            />
+            <small className="form-help">Separate multiple labels with commas</small>
           </div>
 
           <div className="form-group">

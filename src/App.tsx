@@ -4,6 +4,7 @@ import { useUrlState } from './hooks/useUrlState'
 import { CalendarView } from './components/CalendarView'
 import { LineView } from './components/LineView'
 import { ListView } from './components/ListView'
+import { LabelSummary } from './components/LabelSummary'
 import { EntryForm } from './components/EntryForm'
 import type { TimelineEntry, ViewMode } from './types/timeline'
 
@@ -78,13 +79,16 @@ function App() {
     <div className="app">
       <header className="app-header">
         <div className="header-content">
-          <input
-            type="text"
-            value={state.timelineData.name}
-            onChange={(e) => handleTimelineNameChange(e.target.value)}
-            className="timeline-title"
-            placeholder="Timeline Name"
-          />
+          <div className="timeline-title-container">
+            <span className="edit-icon">✏️</span>
+            <input
+              type="text"
+              value={state.timelineData.name}
+              onChange={(e) => handleTimelineNameChange(e.target.value)}
+              className="timeline-title"
+              placeholder="Timeline Name"
+            />
+          </div>
           
           <div className="view-controls">
             <button 
@@ -147,11 +151,14 @@ function App() {
         )}
 
         {state.viewMode === 'list' && (
-          <ListView 
-            entries={state.timelineData.entries} 
-            onEditEntry={handleEditEntry}
-            onDeleteEntry={handleDeleteEntry}
-          />
+          <>
+            <LabelSummary entries={state.timelineData.entries} />
+            <ListView 
+              entries={state.timelineData.entries} 
+              onEditEntry={handleEditEntry}
+              onDeleteEntry={handleDeleteEntry}
+            />
+          </>
         )}
 
         {state.timelineData.entries.length === 0 && state.viewMode !== 'list' && (

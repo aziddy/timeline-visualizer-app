@@ -41,6 +41,7 @@ export const ListView: React.FC<ListViewProps> = ({ entries, onEditEntry, onDele
             <div className="header-cell name-header">Name</div>
             <div className="header-cell period-header">Period</div>
             <div className="header-cell duration-header">Duration</div>
+            <div className="header-cell labels-header">Labels</div>
             <div className="header-cell note-header">Note</div>
             <div className="header-cell actions-header">Actions</div>
           </div>
@@ -58,6 +59,17 @@ export const ListView: React.FC<ListViewProps> = ({ entries, onEditEntry, onDele
               </div>
               <div className="entry-cell duration-cell">
                 {calculateDuration(entry.startDate, entry.endDate)}
+              </div>
+              <div className="entry-cell labels-cell">
+                {entry.labels && entry.labels.length > 0 ? (
+                  <div className="labels-container">
+                    {entry.labels.map((label, index) => (
+                      <span key={index} className="label-tag">
+                        {label}
+                      </span>
+                    ))}
+                  </div>
+                ) : '—'}
               </div>
               <div className="entry-cell note-cell">
                 {entry.note || '—'}

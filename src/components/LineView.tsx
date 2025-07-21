@@ -102,7 +102,7 @@ export const LineView: React.FC<LineViewProps> = ({ entries, mode, onEditEntry, 
                     width: `${position.width}%`,
                     top: `${(index * 30) + 60}px`
                   }}
-                  title={`${entry.name}${entry.note ? ': ' + entry.note : ''}`}
+                  title={`${entry.name}${entry.labels && entry.labels.length > 0 ? ' [' + entry.labels.join(', ') + ']' : ''}${entry.note ? ': ' + entry.note : ''}`}
                   onClick={(e) => {
                     e.stopPropagation();
                     onEditEntry(entry);
@@ -199,7 +199,7 @@ export const LineView: React.FC<LineViewProps> = ({ entries, mode, onEditEntry, 
                       width: `${((adjustedEnd - adjustedStart) / rowMonths) * 100}%`,
                       top: `${(entryIndex * 30) + 60}px`
                     }}
-                    title={`${entry.name}${entry.note ? ': ' + entry.note : ''}`}
+                    title={`${entry.name}${entry.labels && entry.labels.length > 0 ? ' [' + entry.labels.join(', ') + ']' : ''}${entry.note ? ': ' + entry.note : ''}`}
                     onClick={(e) => {
                       e.stopPropagation();
                       onEditEntry(entry);
