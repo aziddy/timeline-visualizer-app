@@ -46,17 +46,6 @@ const doPeriodsOverlap = (start1: Date, end1: Date, start2: Date, end2: Date): b
   return start1 < end2 && start2 < end1;
 };
 
-// Helper function to calculate overlap in months between two periods
-const calculateOverlapMonths = (start1: Date, end1: Date, start2: Date, end2: Date): number => {
-  if (!doPeriodsOverlap(start1, end1, start2, end2)) {
-    return 0;
-  }
-  
-  const overlapStart = start1 > start2 ? start1 : start2;
-  const overlapEnd = end1 < end2 ? end1 : end2;
-  
-  return calculateDurationInMonths(overlapStart, overlapEnd);
-};
 
 // Calculate non-overlapping duration for entries with specific labels
 export const calculateLabelDurations = (entries: TimelineEntry[]): Record<string, number> => {
