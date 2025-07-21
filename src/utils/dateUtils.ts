@@ -41,10 +41,6 @@ export const calculateDurationInMonths = (startDate: Date, endDate: Date | null)
   return Math.max(1, months);
 };
 
-// Helper function to check if two date ranges overlap
-const doPeriodsOverlap = (start1: Date, end1: Date, start2: Date, end2: Date): boolean => {
-  return start1 < end2 && start2 < end1;
-};
 
 
 // Calculate non-overlapping duration for entries with specific labels
